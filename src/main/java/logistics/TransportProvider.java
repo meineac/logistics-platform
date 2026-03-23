@@ -1,4 +1,4 @@
-package Infrastructure;
+package logistics;
 
 import models.transport.Transport;
 

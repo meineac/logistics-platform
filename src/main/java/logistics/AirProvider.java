@@ -1,17 +1,17 @@
-package Infrastructure;
+package logistics;
 
+import models.transport.AirTransport;
 import models.transport.Transport;
 import models.transport.TransportType;
-import models.transport.WaterTransport;
 
-public class WaterProvider extends  TransportProvider {
+public class AirProvider extends TransportProvider {
     @Override
     boolean canHandle(String name) {
-        return TransportType.WATER.matches(name);
+        return TransportType.AIR.matches(name);
     }
 
     @Override
     Transport createTransport(String name, double overheads, double speed) {
-        return new WaterTransport(name, overheads, speed);
+        return new AirTransport(name, overheads, speed);
     }
 }

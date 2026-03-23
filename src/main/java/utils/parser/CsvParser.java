@@ -1,6 +1,6 @@
 package utils.parser;
 
-import Infrastructure.TransportProvider;
+import logistics.TransportProvider;
 import models.LogisticsData;
 import models.cargo.CargoItem;
 import models.transport.Transport;
