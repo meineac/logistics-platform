@@ -1,18 +1,27 @@
 package models.transport;
 
-public enum TransportType {
+import java.util.Arrays;
 
-    AIR("air"),
-    LAND("land"),
-    WATER("water");
+public enum TransportType {
+    AIR("Air", "air", "воздух"),
+    LAND("Land", "land", "земля"),
+    WATER("Water", "water", "вода");
 
     private final String name;
+    private final String[] keywords;
 
-    TransportType(String name) {
+    TransportType(String name, String... keywords) {
         this.name = name;
+        this.keywords = keywords;
     }
 
-    String getName() {
+    public String getName() {
         return name;
+    }
+
+    public boolean matches(String text) {
+        if (text == null) return false;
+        String lower = text.toLowerCase();
+        return Arrays.stream(keywords).anyMatch(lower::contains);
     }
 }
