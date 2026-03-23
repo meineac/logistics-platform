@@ -1,17 +1,17 @@
-package logistics;
+package logistics.transportation;
 
-import models.transport.LandTransport;
+import models.transport.AirTransport;
 import models.transport.Transport;
 import models.transport.TransportType;
 
-public class LandProvider extends TransportProvider {
+public class AirProvider extends TransportProvider {
     @Override
     boolean canHandle(String name) {
-        return TransportType.LAND.matches(name);
+        return TransportType.AIR.matches(name);
     }
 
     @Override
     Transport createTransport(String name, double overheads, double speed) {
-        return new LandTransport(name, overheads, speed);
+        return new AirTransport(name, overheads, speed);
     }
 }

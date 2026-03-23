@@ -1,4 +1,4 @@
-package logistics;
+package logistics.transportation;
 
 import models.transport.Transport;
 import models.transport.TransportType;
