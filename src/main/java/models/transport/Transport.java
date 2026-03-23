@@ -11,6 +11,10 @@ public abstract class Transport {
         this.speed = speed;
     }
 
+    public double calculateTransportCost(double distance) {
+        return distance * overheads;
+    }
+
     public abstract String getType();
 
     public String getName() {

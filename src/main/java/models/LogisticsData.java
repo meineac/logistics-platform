@@ -1,7 +1,7 @@
 package models;
 
-import models.cargo.Cargo;
+import models.cargo.CargoItem;
 import models.transport.Transport;
 import java.util.List;
 
-public record LogisticsData(List<Cargo> cargos, List<Transport> transports) { }
+public record LogisticsData(List<CargoItem> cargoItems, List<Transport> transports) { }

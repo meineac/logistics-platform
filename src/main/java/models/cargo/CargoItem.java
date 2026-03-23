@@ -1,14 +1,18 @@
 package models.cargo;
 
-public class Cargo {
+public class CargoItem {
     private final String name;
     private final double weight;
     private final double cost;
 
-    public Cargo(Builder builder) {
+    public CargoItem(Builder builder) {
         this.name = builder.name;
         this.weight = builder.weight;
         this.cost = builder.cost;
+    }
+
+    public double calculateItemCost() {
+        return weight * cost;
     }
 
     public String getName() {
@@ -43,8 +47,8 @@ public class Cargo {
             return this;
         }
 
-        public Cargo build() {
-            return new Cargo(this);
+        public CargoItem build() {
+            return new CargoItem(this);
         }
     }
 }

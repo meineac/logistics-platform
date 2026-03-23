@@ -2,7 +2,7 @@ package utils.parser;
 
 import Infrastructure.TransportProvider;
 import models.LogisticsData;
-import models.cargo.Cargo;
+import models.cargo.CargoItem;
 import models.transport.Transport;
 
 import java.util.ArrayList;
@@ -17,7 +17,7 @@ public class CsvParser {
     }
 
     public LogisticsData parseData(List<List<String>> rows) {
-        List<Cargo> cargos = new ArrayList<>();
+        List<CargoItem> cargoItems = new ArrayList<>();
         List<Transport> transports = new ArrayList<>();
 
         for (List<String> row : rows) {
@@ -26,16 +26,16 @@ public class CsvParser {
             String recordType = row.getFirst().toLowerCase();
 
             if (recordType.equals("cargo")) {
-                cargos.add(parseCargo(row));
+                cargoItems.add(parseCargo(row));
             } else if (recordType.equals("transport")) {
                 transports.add(parseTransport(row));
             }
         }
-        return new LogisticsData(cargos, transports);
+        return new LogisticsData(cargoItems, transports);
     }
 
-    private Cargo parseCargo(List<String> row) {
-        return new Cargo.Builder()
+    private CargoItem parseCargo(List<String> row) {
+        return new CargoItem.Builder()
                 .setName(row.get(1))
                 .setWeight(Double.parseDouble(row.get(2)))
                 .setCost(Double.parseDouble(row.get(3)))
