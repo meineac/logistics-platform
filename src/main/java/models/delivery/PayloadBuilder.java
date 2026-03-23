@@ -1,4 +1,4 @@
-package logistics.shipment;
+package models.delivery;
 
 import models.cargo.CargoItem;
 import models.cargo.MixedCargoBatch;
@@ -8,16 +8,16 @@ import models.cargo.SingleCargoBatch;
 import java.util.ArrayList;
 import java.util.List;
 
-public class ShippableBuilder {
+public class PayloadBuilder {
     private final List<Shippable> items = new ArrayList<>();
 
 
-    public ShippableBuilder addCargo(CargoItem item, int quantity) {
+    public PayloadBuilder addCargo(CargoItem item, int quantity) {
         items.add(new SingleCargoBatch(item, quantity));
         return this;
     }
 
-    public ShippableBuilder addMixedBatch(Shippable mixedBox) {
+    public PayloadBuilder addMixedBatch(Shippable mixedBox) {
         items.add(mixedBox);
         return this;
     }
