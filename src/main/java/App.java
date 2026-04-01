@@ -6,26 +6,26 @@ import models.LogisticsData;
 import models.cargo.CargoItem;
 import models.delivery.PayloadBuilder;
 import service.LogisticsService;
-import utils.parser.CsvParser;
-import utils.reader.CsvReader;
+import utils.helper.EntityAssembler;
+import utils.reader.XmlDataLoader;
 
 import java.util.List;
 
 public class App {
     public static void main(String[] args) {
         // 1. Assemble parsers and providers
-        CsvParser parser = new CsvParser(List.of(
+        EntityAssembler assembler = new EntityAssembler(List.of(
                 new AirProvider(),
                 new LandProvider(),
                 new WaterProvider()
         ));
-        CsvReader reader = new CsvReader(parser);
+        var dataLoader = new XmlDataLoader(assembler);
 
         // 2. Create the main Service
-        LogisticsService service = new LogisticsService(reader, new StandardShipmentAssembler());
+        LogisticsService service = new LogisticsService(dataLoader, new StandardShipmentAssembler());
 
         // 3. Load the data
-        service.loadSystemData("src/main/resources/logistic.csv");
+        service.loadSystemData("src/main/resources/logistic.xml");
         LogisticsData data = service.getAvailableData();
 
         System.out.println("--- Logistics System Initialized ---");

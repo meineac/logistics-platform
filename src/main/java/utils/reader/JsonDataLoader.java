@@ -12,29 +12,21 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
-public class JsonDataLoader implements DataLoader {
-    private final EntityAssembler assembler;
+public class JsonDataLoader extends TemplateDataLoader {
 
     public JsonDataLoader(EntityAssembler assembler) {
-        this.assembler = assembler;
+        super(assembler);
     }
 
     @Override
-    public LogisticsData load(String filePath) {
-        try {
-            ObjectMapper mapper = new ObjectMapper();
-            JsonNode rootNode = mapper.readTree(new File(filePath));
-
-            JsonNode cargoArrayNode = rootNode.get("cargoItems");
-            JsonNode transportArrayNode = rootNode.get("transports");
-
-            List<CargoItem> cargoItems = parseCargos(cargoArrayNode);
-            List<Transport> transports = parseTransports(transportArrayNode);
-
-            return new LogisticsData(cargoItems, transports);
-        } catch (IOException e) {
-            throw new RuntimeException("Failed to read JSON: " + filePath, e);
-        }
+    public LogisticsData processData(String filePath) throws IOException {
+        ObjectMapper mapper = new ObjectMapper();
+        JsonNode rootNode = mapper.readTree(new File(filePath));
+        JsonNode cargoArrayNode = rootNode.get("cargoItems");
+        JsonNode transportArrayNode = rootNode.get("transports");
+        List<CargoItem> cargoItems = parseCargos(cargoArrayNode);
+        List<Transport> transports = parseTransports(transportArrayNode);
+        return new LogisticsData(cargoItems, transports);
     }
 
     private List<Transport> parseTransports(JsonNode transportArrayNode) {

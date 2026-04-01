@@ -18,15 +18,13 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
-public class XmlDataLoader implements DataLoader {
-    private final EntityAssembler assembler;
-
+public class XmlDataLoader extends TemplateDataLoader {
     public XmlDataLoader(EntityAssembler assembler) {
-        this.assembler = assembler;
+        super(assembler);
     }
 
     @Override
-    public LogisticsData load(String filePath) {
+    public LogisticsData processData(String filePath) throws IOException {
         List<CargoItem> cargoItems;
         List<Transport> transports;
 
@@ -47,8 +45,6 @@ public class XmlDataLoader implements DataLoader {
             throw new RuntimeException("Fatal Error: The XML parser could not be configured properly.", e);
         } catch (SAXException e) {
             throw new RuntimeException("Parse Error: The XML file is malformed or invalid.", e);
-        } catch (IOException e) {
-            throw new RuntimeException("Failed to read XML file at: " + filePath, e);
         }
 
         return new LogisticsData(cargoItems, transports);

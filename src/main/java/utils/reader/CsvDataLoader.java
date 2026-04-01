@@ -12,45 +12,35 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
-public class CsvDataLoader implements DataLoader {
-    private final EntityAssembler assembler;
+public class CsvDataLoader extends TemplateDataLoader {
 
     public CsvDataLoader(EntityAssembler assembler) {
-        this.assembler = assembler;
+        super(assembler);
     }
 
     @Override
-    public LogisticsData load(String filePath) {
-        try {
-            var rows = read(filePath);
-
-            List<CargoItem> cargoItems = new ArrayList<>();
-            List<Transport> transports = new ArrayList<>();
-
-            for (List<String> row : rows) {
-                if (row == null || row.isEmpty() || row.getFirst() == null) continue;
-
-                String recordType = row.getFirst().toLowerCase();
-
-                if (recordType.equals("cargo")) {
-                    cargoItems.add(assembler.assembleCargo(
-                            row.get(1),
-                            Double.parseDouble(row.get(2)),
-                            Double.parseDouble(row.get(3))
-                    ));
-                } else if (recordType.equals("transport")) {
-                    transports.add(assembler.assembleTransport(
-                            row.get(1),
-                            Double.parseDouble(row.get(4)),
-                            Double.parseDouble(row.get(5))
-                    ));
-                }
+    public LogisticsData processData(String filePath) throws IOException {
+        var rows = read(filePath);
+        List<CargoItem> cargoItems = new ArrayList<>();
+        List<Transport> transports = new ArrayList<>();
+        for (List<String> row : rows) {
+            if (row == null || row.isEmpty() || row.getFirst() == null) continue;
+            String recordType = row.getFirst().toLowerCase();
+            if (recordType.equals("cargo")) {
+                cargoItems.add(assembler.assembleCargo(
+                        row.get(1),
+                        Double.parseDouble(row.get(2)),
+                        Double.parseDouble(row.get(3))
+                ));
+            } else if (recordType.equals("transport")) {
+                transports.add(assembler.assembleTransport(
+                        row.get(1),
+                        Double.parseDouble(row.get(4)),
+                        Double.parseDouble(row.get(5))
+                ));
             }
-
-            return new LogisticsData(cargoItems, transports);
-        } catch (IOException e) {
-            throw new RuntimeException("Failed to read CSV file: " + filePath, e);
         }
+        return new LogisticsData(cargoItems, transports);
     }
 
     private List<List<String>> read(String filePath) throws IOException {
