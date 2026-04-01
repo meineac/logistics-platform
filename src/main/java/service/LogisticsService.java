@@ -5,20 +5,20 @@ import models.delivery.Shipment;
 import models.delivery.PayloadBuilder;
 import models.LogisticsData;
 import models.transport.Transport;
-import utils.reader.Reader;
+import utils.reader.DataLoader;
 
 public class LogisticsService {
-    private final Reader dataReader;
+    private final DataLoader dataLoader;
     private final ShipmentAssembler factory;
     private LogisticsData data;
 
-    public LogisticsService(Reader dataReader, ShipmentAssembler factory) {
-        this.dataReader = dataReader;
+    public LogisticsService(DataLoader dataLoader, ShipmentAssembler factory) {
+        this.dataLoader = dataLoader;
         this.factory = factory;
     }
 
     public void loadSystemData(String filePath) {
-        this.data = dataReader.read(filePath);
+        this.data = dataLoader.load(filePath);
     }
 
     public LogisticsData getAvailableData() {
