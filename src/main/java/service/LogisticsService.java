@@ -5,7 +5,7 @@ import models.delivery.Shipment;
 import models.delivery.PayloadBuilder;
 import models.LogisticsData;
 import models.transport.Transport;
-import utils.reader.DataLoader;
+import utils.loader.DataLoader;
 
 public class LogisticsService {
     private final DataLoader dataLoader;

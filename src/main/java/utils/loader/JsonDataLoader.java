@@ -1,4 +1,4 @@
-package utils.reader;
+package utils.loader;
 
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;

@@ -7,7 +7,7 @@ import models.cargo.CargoItem;
 import models.delivery.PayloadBuilder;
 import service.LogisticsService;
 import utils.helper.EntityAssembler;
-import utils.reader.XmlDataLoader;
+import utils.loader.XmlDataLoader;
 
 import java.util.List;
 
