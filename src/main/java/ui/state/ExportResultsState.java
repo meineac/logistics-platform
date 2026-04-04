@@ -43,7 +43,7 @@ public class ExportResultsState implements MenuState {
             System.out.print("Enter password for Encryption (leave blank for none): ");
             String password = context.getScanner().nextLine().trim();
 
-            System.out.print("Enter target file name (without extension): ");
+            System.out.print("Enter target file name: ");
             String fileName = "src/main/resources/exports/" + context.getScanner().nextLine().trim();
 
             System.out.println("\n[SYSTEM] Exporting " + sortedShipments.size() + " ordered records...");

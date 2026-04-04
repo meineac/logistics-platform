@@ -43,7 +43,6 @@ public class DataExportService {
 
         try (OutputStream fos = new FileOutputStream(filePath)) {
             exporter.export(data, fos);
-//            fos.flush();
         }
 
         System.out.println("Export completed successfully to: " + filePath);
