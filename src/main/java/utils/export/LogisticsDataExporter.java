@@ -6,8 +6,8 @@ import utils.export.format.CsvDataExporter;
 import utils.export.format.DataExporter;
 import utils.export.format.JsonDataExporter;
 import utils.export.format.XmlDataExporter;
-import utils.export.decorators.CompressionExporterDecorator;
-import utils.export.decorators.EncryptionExporterDecorator;
+import utils.export.decorators.CompressingDataExporter;
+import utils.export.decorators.EncryptingDataExporter;
 
 import javax.crypto.SecretKey;
 import java.io.FileOutputStream;
@@ -31,13 +31,13 @@ public class LogisticsDataExporter {
         String innerFileName = "export." + format.name().toLowerCase();
 
         if (compress) {
-            exporter = new CompressionExporterDecorator(exporter, innerFileName);
+            exporter = new CompressingDataExporter(exporter, innerFileName);
             filePath += ".zip";
         }
 
         if (password != null && !password.isBlank()) {
             SecretKey key = KeyManager.deriveKeyFromPassword(password);
-            exporter = new EncryptionExporterDecorator(exporter, key);
+            exporter = new EncryptingDataExporter(exporter, key);
             filePath += ".enc";
         }
 

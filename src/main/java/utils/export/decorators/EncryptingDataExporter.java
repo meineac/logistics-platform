@@ -9,10 +9,10 @@ import java.io.OutputStream;
 import java.security.InvalidKeyException;
 import java.security.NoSuchAlgorithmException;
 
-public class EncryptionExporterDecorator extends DataExporterDecorator {
+public class EncryptingDataExporter extends DataExporterDecorator {
     private final SecretKey key;
 
-    public EncryptionExporterDecorator(DataExporter exporter, SecretKey key) {
+    public EncryptingDataExporter(DataExporter exporter, SecretKey key) {
         super(exporter);
         this.key = key;
     }

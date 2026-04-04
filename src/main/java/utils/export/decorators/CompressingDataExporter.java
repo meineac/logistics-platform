@@ -8,10 +8,10 @@ import java.io.OutputStream;
 import java.util.zip.ZipEntry;
 import java.util.zip.ZipOutputStream;
 
-public class CompressionExporterDecorator extends DataExporterDecorator {
+public class CompressingDataExporter extends DataExporterDecorator {
     private final String innerFileName;
 
-    public CompressionExporterDecorator(DataExporter exporter, String innerFileName) {
+    public CompressingDataExporter(DataExporter exporter, String innerFileName) {
         super(exporter);
         this.innerFileName = innerFileName;
     }
