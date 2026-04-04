@@ -12,7 +12,7 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
-public class JsonDataLoader extends TemplateDataLoader {
+public class JsonDataLoader extends DataLoaderTemplate {
 
     public JsonDataLoader(EntityAssembler assembler) {
         super(assembler);

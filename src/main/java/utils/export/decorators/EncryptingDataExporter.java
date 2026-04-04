@@ -1,6 +1,6 @@
 package utils.export.decorators;
 
-import models.LogisticsData;
+import models.delivery.Shipment;
 import utils.export.format.DataExporter;
 
 import javax.crypto.*;
@@ -8,6 +8,7 @@ import java.io.IOException;
 import java.io.OutputStream;
 import java.security.InvalidKeyException;
 import java.security.NoSuchAlgorithmException;
+import java.util.List;
 
 public class EncryptingDataExporter extends DataExporterDecorator {
     private final SecretKey key;
@@ -18,7 +19,7 @@ public class EncryptingDataExporter extends DataExporterDecorator {
     }
 
     @Override
-    public void export(LogisticsData data, OutputStream out) throws IOException {
+    public void export(List<Shipment> data, OutputStream out) throws IOException {
         try {
             Cipher cipher = Cipher.getInstance("AES");
             cipher.init(Cipher.ENCRYPT_MODE, key);

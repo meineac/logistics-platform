@@ -1,8 +1,6 @@
 package utils.export.format;
 
-import models.LogisticsData;
-import models.cargo.CargoItem;
-import models.transport.Transport;
+import models.delivery.Shipment;
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;
 
@@ -14,10 +12,11 @@ import javax.xml.transform.dom.DOMSource;
 import javax.xml.transform.stream.StreamResult;
 import java.io.IOException;
 import java.io.OutputStream;
+import java.util.List;
 
 public class XmlDataExporter implements DataExporter {
     @Override
-    public void export(LogisticsData data, OutputStream out) throws IOException {
+    public void export(List<Shipment> data, OutputStream out) throws IOException {
         DocumentBuilder builder;
         try {
             builder = DocumentBuilderFactory.newInstance().newDocumentBuilder();
@@ -26,49 +25,25 @@ public class XmlDataExporter implements DataExporter {
         }
         Document doc = builder.newDocument();
 
-        Element rootElement = doc.createElement("logisticsData");
+        Element rootElement = doc.createElement("shipment");
         doc.appendChild(rootElement);
 
-        Element cargoItems = doc.createElement("cargoItems");
-        rootElement.appendChild(cargoItems);
-
-        for (CargoItem item : data.cargoItems()) {
-            Element cargo = doc.createElement("cargo");
-
-            Element name = doc.createElement("name");
-            name.appendChild(doc.createTextNode(item.getName()));
-            cargo.appendChild(name);
-
-            Element weight = doc.createElement("weight");
-            weight.appendChild(doc.createTextNode(String.valueOf(item.getWeight())));
-            cargo.appendChild(weight);
-
-            Element cost = doc.createElement("cost");
-            cost.appendChild(doc.createTextNode(String.valueOf(item.getCost())));
-            cargo.appendChild(cost);
-
-            cargoItems.appendChild(cargo);
-        }
-
-        Element transports = doc.createElement("transports");
-        rootElement.appendChild(transports);
-
-        for (Transport item : data.transports()) {
+        for (var item : data) {
             Element transport = doc.createElement("transport");
 
             Element name = doc.createElement("name");
-            name.appendChild(doc.createTextNode(item.getName()));
+            name.appendChild(doc.createTextNode(item.getTransport().getName()));
             transport.appendChild(name);
 
-            Element overheads = doc.createElement("overheads");
-            overheads.appendChild(doc.createTextNode(String.valueOf(item.getOverheads())));
-            transport.appendChild(overheads);
+            Element time = doc.createElement("time");
+            time.appendChild(doc.createTextNode(String.valueOf(item.calculateDeliveryTime())));
+            transport.appendChild(time);
 
-            Element speed = doc.createElement("speed");
-            speed.appendChild(doc.createTextNode(String.valueOf(item.getSpeed())));
-            transport.appendChild(speed);
+            Element cost = doc.createElement("cost");
+            cost.appendChild(doc.createTextNode(String.valueOf(item.calculateTotalDeliveryCost())));
+            transport.appendChild(cost);
 
-            transports.appendChild(transport);
+            rootElement.appendChild(transport);
         }
 
         try {

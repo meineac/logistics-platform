@@ -1,6 +1,6 @@
 package service;
 
-import models.LogisticsData;
+import models.delivery.Shipment;
 import utils.KeyManager;
 import utils.export.format.CsvDataExporter;
 import utils.export.format.DataExporter;
@@ -13,12 +13,13 @@ import javax.crypto.SecretKey;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.OutputStream;
+import java.util.List;
 
 public class DataExportService {
 
     public enum Format { JSON, CSV, XML }
 
-    public void exportData(LogisticsData data, String filePath, Format format,
+    public void exportData(List<Shipment> data, String filePath, Format format,
                            boolean compress, String password) throws IOException {
 
         DataExporter exporter = switch (format) {
@@ -42,6 +43,7 @@ public class DataExportService {
 
         try (OutputStream fos = new FileOutputStream(filePath)) {
             exporter.export(data, fos);
+//            fos.flush();
         }
 
         System.out.println("Export completed successfully to: " + filePath);

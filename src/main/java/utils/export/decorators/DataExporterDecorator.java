@@ -1,10 +1,11 @@
 package utils.export.decorators;
 
-import models.LogisticsData;
+import models.delivery.Shipment;
 import utils.export.format.DataExporter;
 
 import java.io.IOException;
 import java.io.OutputStream;
+import java.util.List;
 
 public class DataExporterDecorator implements DataExporter {
     protected final DataExporter exporter;
@@ -14,7 +15,7 @@ public class DataExporterDecorator implements DataExporter {
     }
 
     @Override
-    public void export(LogisticsData data, OutputStream out) throws IOException {
+    public void export(List<Shipment> data, OutputStream out) throws IOException {
         exporter.export(data, out);
     }
 }

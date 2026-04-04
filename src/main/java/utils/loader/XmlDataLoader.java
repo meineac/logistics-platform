@@ -18,7 +18,7 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
-public class XmlDataLoader extends TemplateDataLoader {
+public class XmlDataLoader extends DataLoaderTemplate {
     public XmlDataLoader(EntityAssembler assembler) {
         super(assembler);
     }

@@ -12,7 +12,7 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
-public class CsvDataLoader extends TemplateDataLoader {
+public class CsvDataLoader extends DataLoaderTemplate {
 
     public CsvDataLoader(EntityAssembler assembler) {
         super(assembler);

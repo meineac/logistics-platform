@@ -6,10 +6,10 @@ import utils.helper.EntityAssembler;
 import java.io.File;
 import java.io.IOException;
 
-public abstract class TemplateDataLoader implements DataLoader {
+public abstract class DataLoaderTemplate implements DataLoader {
     protected final EntityAssembler assembler;
 
-    public TemplateDataLoader(EntityAssembler assembler) {
+    public DataLoaderTemplate(EntityAssembler assembler) {
         this.assembler = assembler;
     }
 

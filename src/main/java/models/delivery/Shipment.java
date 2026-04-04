@@ -23,4 +23,8 @@ public class Shipment {
     public double calculateDeliveryTime() {
         return distance / transport.getSpeed();
     }
+
+    public Transport getTransport() {
+        return transport;
+    }
 }
