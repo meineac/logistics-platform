@@ -1,4 +1,4 @@
-package utils.export;
+package service;
 
 import models.LogisticsData;
 import utils.KeyManager;
@@ -14,13 +14,12 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.OutputStream;
 
-public class LogisticsDataExporter {
+public class DataExportService {
 
     public enum Format { JSON, CSV, XML }
 
     public void exportData(LogisticsData data, String filePath, Format format,
-                           boolean compress, boolean encrypt,
-                           String password) throws IOException {
+                           boolean compress, String password) throws IOException {
 
         DataExporter exporter = switch (format) {
             case JSON -> new JsonDataExporter();

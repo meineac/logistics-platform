@@ -7,14 +7,18 @@ import models.LogisticsData;
 import models.transport.Transport;
 import utils.loader.DataLoader;
 
+import java.io.IOException;
+
 public class LogisticsService {
     private final DataLoader dataLoader;
     private final ShipmentAssembler factory;
+    private final DataExportService exportService;
     private LogisticsData data;
 
-    public LogisticsService(DataLoader dataLoader, ShipmentAssembler factory) {
+    public LogisticsService(DataLoader dataLoader, ShipmentAssembler factory, DataExportService exportService) {
         this.dataLoader = dataLoader;
         this.factory = factory;
+        this.exportService = exportService;
     }
 
     public void loadSystemData(String filePath) {
@@ -35,5 +39,20 @@ public class LogisticsService {
         var finalPayload = payloadBuilder.build();
 
         return factory.assembleShipment(finalPayload, transport, distance);
+    }
+
+    public void exportSystemData(String filePath, DataExportService.Format format,
+                                 boolean compress, String password) {
+
+        if (this.data == null) {
+            throw new IllegalStateException("No data available to export.");
+        }
+
+        try {
+            exportService.exportData(this.data, filePath, format, compress, password);
+        } catch (IOException e) {
+            throw new RuntimeException("Exporting data error.", e);
+        }
+
     }
 }

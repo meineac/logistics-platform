@@ -3,6 +3,7 @@ import logistics.transportation.AirProvider;
 import logistics.transportation.LandProvider;
 import logistics.transportation.WaterProvider;
 import models.LogisticsData;
+import service.DataExportService;
 import service.LogisticsService;
 import utils.export.format.DataExporter;
 import utils.export.format.XmlDataExporter;
@@ -25,7 +26,7 @@ public class App {
         var dataLoader = new XmlDataLoader(assembler);
 
         // 2. Create the main Service
-        LogisticsService service = new LogisticsService(dataLoader, new StandardShipmentAssembler());
+        LogisticsService service = new LogisticsService(dataLoader, new StandardShipmentAssembler(), new DataExportService());
 
         // 3. Load the data
         service.loadSystemData("src/main/resources/imports/logistic.xml");
@@ -41,6 +42,8 @@ public class App {
         } catch (IOException e) {
             System.out.println(e.getMessage());
         }
+
+        service.exportSystemData("src/main/resources/exports/filename", DataExportService.Format.XML, true, "HelloWorld");
 //        // --- SIMULATE OPERATOR REQUEST ---
 //
 //        // A. Select items from the database
