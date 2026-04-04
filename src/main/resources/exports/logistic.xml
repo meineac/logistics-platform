@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<logisticsData>
+    <cargoItems>
+        <cargo>
+            <name>Электроника</name>
+            <weight>1.5</weight>
+            <cost>50.0</cost>
+        </cargo>
+        <cargo>
+            <name>Одежда</name>
+            <weight>0.8</weight>
+            <cost>20.0</cost>
+        </cargo>
+        <cargo>
+            <name>Оборудование</name>
+            <weight>120.0</weight>
+            <cost>15.0</cost>
+        </cargo>
+        <cargo>
+            <name>Скоропортящиеся продукты</name>
+            <weight>10.0</weight>
+            <cost>100.0</cost>
+        </cargo>
+    </cargoItems>
+    <transports>
+        <transport>
+            <name>Грузовик (Земля)</name>
+            <overheads>15.0</overheads>
+            <speed>80.0</speed>
+        </transport>
+        <transport>
+            <name>Поезд (Земля)</name>
+            <overheads>5.0</overheads>
+            <speed>60.0</speed>
+        </transport>
+        <transport>
+            <name>Танкер (Вода)</name>
+            <overheads>2.0</overheads>
+            <speed>35.0</speed>
+        </transport>
+        <transport>
+            <name>Самолет (Воздух)</name>
+            <overheads>150.0</overheads>
+            <speed>850.0</speed>
+        </transport>
+        <transport>
+            <name>Вертолет (Воздух)</name>
+            <overheads>200.0</overheads>
+            <speed>250.0</speed>
+        </transport>
+    </transports>
+</logisticsData>
